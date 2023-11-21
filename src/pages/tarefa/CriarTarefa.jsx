@@ -8,6 +8,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
 
 //Declaração do componente CriarTarefa, recebendo como props, do Componente ListarTarefa, os states handClose, tarefas e setTarefas
 const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
@@ -53,17 +54,19 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
     //console.log(`Tarefas: ` + JSON.stringify(tarefas));
     handleClose();
   };
+  
 
   return(
-    <Grid container spacing={2}>
+    <Grid  container spacing={2}>
       <Card sx={style}>
-        <CardHeader
+        <CardHeader 
           title="Tarefas"
           subheader="Cadastro de Tarefas"
         /> 
         <CardContent sx={{
           width: '95%',
           maxWidth: '100%',
+          bgcolor: '#f5f5f5'
         }}>
           <Grid item xs={12}>
             <FormControl fullWidth>
@@ -144,10 +147,10 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
             </Grid>
             <Grid container spacing={2} pl={2} mt={2}>
               <Grid item xs={1}>
-                <Button size="small" variant="contained" onClick={handleSalvar}>Salvar</Button>
+                <Button size="small" variant="contained" color="secondary" onClick={handleSalvar}>Salvar</Button>
               </Grid>  
               <Grid item xs={1}>  
-                <Button size="small" variant="outlined" onClick={handleClose}>Cancelar</Button>  
+                <Button size="small" variant="outlined" color="inherit" onClick={handleClose}>Cancelar</Button>  
               </Grid>
             </Grid>  
           </Grid>
