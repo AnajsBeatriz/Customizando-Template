@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
  
 function Header() {
     return (
-      <Box sx={{ flexGrow: 1, bgcolor:'#4a148c' }}>
+      <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ bgcolor:'#6a1b9a' }}>
         <Toolbar>
           <IconButton
@@ -24,7 +24,6 @@ function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
             Gerenciamento de Projetos
           </Typography>
-          <Button color="inherit">Sair</Button>
         </Toolbar>
       </AppBar>
     </Box>

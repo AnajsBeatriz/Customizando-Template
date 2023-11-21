@@ -23,7 +23,7 @@ import { styled } from '@mui/material/styles';
 
 import CriarTarefa from './CriarTarefa';
 import EditarTarefa from './EditarTarefa';
-
+import Login from '../Login';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -81,6 +81,10 @@ const ListarTarefa = () => {
   const handleOpenEditar = () => setOpenEditar(true);
   const handleCloseEditar = () => setOpenEditar(false);
 
+  const handleReload = () => {
+    window.location.reload(); // Isso recarregará a página
+  };
+
   //O array definido acima é setado como conteúdo do state Tarefas na renderização inicial do componente.
   useEffect(() => {
     setTarefas(initialRows);
@@ -113,15 +117,16 @@ const ListarTarefa = () => {
     return(
     <>
     <Card > 
+    <Button size="small" variant="outlined" onClick={handleReload}>Sair</Button>
         <CardHeader
           title="Tarefas"
-          subheader="Listagem de Tarefas"
+          subheader="Listagem de Tarefas" 
         /> 
         <CardContent>
           
             <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="customized table">
-                <TableHead>
+                <TableHead> 
     
                 <StyledTableRow>
                     <StyledTableCell>Id</StyledTableCell>
