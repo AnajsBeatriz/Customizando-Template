@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -11,12 +11,40 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from '@mui/material/Modal';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+
 
 import CriarTarefa from './CriarTarefa';
 import EditarTarefa from './EditarTarefa';
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
 
 //A função abaixo é usada para criar o array contendo os dados iniciais da listagem de tarefas.
 function createData(
@@ -81,32 +109,47 @@ const ListarTarefa = () => {
     );
   };
 
+
     return(
     <>
-    <Card>
+    <Card > 
         <CardHeader
           title="Tarefas"
           subheader="Listagem de Tarefas"
         /> 
         <CardContent>
+          
             <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <Table sx={{ minWidth: 650 }} size="small" aria-label="customized table">
                 <TableHead>
-                <TableRow>
-                    <TableCell>#</TableCell>
-                    <TableCell>Título</TableCell>
-                    <TableCell align="right">Descrição</TableCell>
-                    <TableCell align="right">Data de Início</TableCell>
-                    <TableCell align="right">Data de Finalização</TableCell>
-                    <TableCell align="right">Status</TableCell>
-                    <TableCell align="right">Recurso</TableCell>
-                    <TableCell align="left"></TableCell>
-                    <TableCell align="left"></TableCell>
-                </TableRow>
+    
+                <StyledTableRow>
+                    <StyledTableCell>Id</StyledTableCell>
+                    <StyledTableCell>Título</StyledTableCell>
+                    <StyledTableCell align="right">Descrição</StyledTableCell>
+                    <StyledTableCell align="right">Data de Início</StyledTableCell>
+                    <StyledTableCell align="right">Data de Finalização</StyledTableCell>
+                    <StyledTableCell align="right">Status</StyledTableCell>
+                    <StyledTableCell align="right">Recurso</StyledTableCell>
+                    <StyledTableCell align="center"></StyledTableCell>
+                   
+                      <TableCell>
+                        < Toolbar >
+                            <Tooltip title="Filter" >
+                            <IconButton >
+                              <FilterListIcon  />
+                            </IconButton>
+                            </Tooltip>
+                        </Toolbar>
+                      </TableCell>
+                    
+           
+
+                </StyledTableRow>
                 </TableHead>
                 <TableBody>
                 {tarefas.map((row, indice) => (
-                    <TableRow
+                    <StyledTableRow
                     key={indice}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
@@ -122,22 +165,24 @@ const ListarTarefa = () => {
                       <TableCell align="right">{row.statusTarefa}</TableCell>
                       <TableCell align="right">{row.recursoTarefa}</TableCell>
                       <TableCell align="center">
-                        <Button variant="contained" color="success" onClick={() => handleEditar(row.idTarefa)}><EditIcon fontSize="small" /></Button>            
+                        <Button variant="text" color="inherit" onClick={() => handleEditar(row.idTarefa)}><EditIcon fontSize="small" /></Button>            
                       </TableCell>
                       <TableCell align="center">
-                        <Button variant="contained" color="error" onClick={() => handleDeletar(row.idTarefa)}><DeleteIcon fontSize="small" /></Button>            
+                        <Button variant="text" color="secondary" onClick={() => handleDeletar(row.idTarefa)}><ClearIcon fontSize="small" /></Button>            
                       </TableCell>
-                    </TableRow>
+                    </StyledTableRow>
                 ))}
                 </TableBody>
             </Table>
-            </TableContainer>
+           
+            </TableContainer>  
         </CardContent>
         <CardActions>
-            <Button size="small" variant="contained" onClick={handleOpen}>Criar Tarefa</Button>
-            <Button size="small" variant="outlined">Cancelar</Button>
+            <Button size="small" variant="contained" color="secondary" onClick={handleOpen}>Criar Tarefa</Button>
+            <Button size="small" variant="outlined" color="inherit">Cancelar</Button>
       </CardActions> 
     </Card>
+
     <div>
       <Modal
         open={open}
@@ -164,6 +209,7 @@ const ListarTarefa = () => {
     </div>
   </>    
  );
+ 
 };
  
 export default ListarTarefa;
