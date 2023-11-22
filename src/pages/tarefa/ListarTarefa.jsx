@@ -117,7 +117,6 @@ const ListarTarefa = () => {
     return(
     <>
     <Card > 
-    <Button size="small" variant="outlined" onClick={handleReload}>Sair</Button>
         <CardHeader
           title="Tarefas"
           subheader="Listagem de Tarefas" 
@@ -212,6 +211,8 @@ const ListarTarefa = () => {
         </div>
       </Modal>  
     </div>
+    <br />
+    <Button >Sair</Button>
   </>    
  );
  

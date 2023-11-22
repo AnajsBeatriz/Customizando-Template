@@ -11,8 +11,8 @@ function BotaoSair() {
 
   return (
     <Button
-      variant="contained"
-      color="secundary" // Defina a cor laranja aqui
+      variant="outlined"
+      color="secundary" 
       onClick={handleSair}
     >
       Sair
